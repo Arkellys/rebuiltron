@@ -1,0 +1,10 @@
+# Dependencies
+/node_modules
+.yarn/*
+!.yarn/{patches,plugins,releases,sdks,versions}
+
+# Miscellaneous
+.DS_Store
+yarn-debug.log*
+yarn-error.log*
+.vscode
