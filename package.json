@@ -55,5 +55,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Arkellys/rebuiltron.git"
-  }
+  },
+  "homepage": "https://github.com/Arkellys/rebuiltron#readme"
 }
