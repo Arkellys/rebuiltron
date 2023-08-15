@@ -11,7 +11,9 @@ module.exports = [
 			options: {
 				jsc: {
 					parser: {
-						jsx: true
+						syntax: "ecmascript",
+						jsx: true,
+						dynamicImport: true
 					},
 					transform: {
 						react: {
