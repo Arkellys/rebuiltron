@@ -41,14 +41,14 @@ The following documentation assume you already have a basic knowledge of how to 
 
 Rebuiltron expects the following folder structure:
 
-```js
+```shell
 my-app
 ├── electron/
-│   └── // Main and preload files
+│   └── # Main and preload files
 ├── public/
-│   └── // Renderer HTML file(s)
+│   └── # Renderer HTML file(s)
 ├── src/
-│   └── // Renderer JS file(s)
+│   └── # Renderer JS file(s)
 └── package.json
 ```
 
@@ -91,12 +91,12 @@ At the root of your project, create a `rebuiltron.config.js` file.
 
 | Option | Type | Required | Description |
 | --- | :---: | :---: | --- |
-| `renderers` | `object` | ✔️ | Renderer entries. It takes the name of the entries as keys and their paths as values. |
-| `preloads` | `object` | ✔️ | Preload entries. It takes the name of the entries as keys and their paths as values. |
-| `sassOptions` | `object` | ❌ | Custom SASS options for `sass-loader`. |
-| `sassOptions.additionalData` | `object` | ❌ | Configuration of `additionalData`. |
-| `sassOptions.additionalData.data` | `string` | ❌ | Data to prepend to SASS files. |
-| `sassOptions.additionalData.exclude` | `Regex` | ❌ | Regex matching the files to exclude from `additionalData`. This is necessary to prevent an `@import loop` error. |
+| `renderers` | `object` | ✓ | Renderer entries. It takes the name of the entries as keys and their paths as values. |
+| `preloads` | `object` | ✓ | Preload entries. It takes the name of the entries as keys and their paths as values. |
+| `sassOptions` | `object` | ✗ | Custom SASS options for `sass-loader`. |
+| `sassOptions.additionalData` | `object` | ✗ | Configuration of `additionalData`. |
+| `sassOptions.additionalData.data` | `string` | ✗ | Data to prepend to SASS files. |
+| `sassOptions.additionalData.exclude` | `Regex` | ✗ | Regex matching the files to exclude from `additionalData`. This is necessary to prevent an `@import loop` error. |
 
 #### Example:
 
