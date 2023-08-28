@@ -22,7 +22,7 @@ Rebuiltron uses webpack with [SWC](https://swc.rs/) to compile JavaScript instea
 - Support for React, JSX, SASS, ICSS
 
 > [!WARNING]
-> Rebuiltron **doesn't support**: Typescript, Flow, CSS Modules, Jest, and proxying.
+> Rebuiltron **doesn't support**: TypeScript, Flow, CSS Modules, Jest, and proxying.
 
 
 ## Installation
