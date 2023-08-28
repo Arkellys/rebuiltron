@@ -94,9 +94,11 @@ At the root of your project, create a `rebuiltron.config.js` file.
 | `renderers` | `object` | ✓ | Renderer entries. It takes the name of the entries as keys and their paths as values. |
 | `preloads` | `object` | ✓ | Preload entries. It takes the name of the entries as keys and their paths as values. |
 | `sassOptions` | `object` | ✗ | Custom SASS options for `sass-loader`. |
-| `sassOptions.additionalData` | `object` | ✗ | Configuration of `additionalData`. |
-| `sassOptions.additionalData.data` | `string` | ✗ | Data to prepend to SASS files. |
-| `sassOptions.additionalData.exclude` | `Regex` | ✗ | Regex matching the files to exclude from `additionalData`. This is necessary to prevent an `@import loop` error. |
+| `sassOptions.additionalData` | `object` | ✗* | Configuration of `additionalData`. |
+| `sassOptions.additionalData.data` | `string` | ✗* | Data to prepend to SASS files. |
+| `sassOptions.additionalData.exclude` | `Regex` | ✗* | Regex matching the files to exclude from `additionalData`. This is necessary to prevent an `@import loop` error. |
+
+<sup>*Required when `sassOptions` is defined.</sup>
 
 #### Example:
 
