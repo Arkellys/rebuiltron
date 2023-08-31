@@ -1,4 +1,4 @@
-const { red, green, yellow, black } = require("colorette");
+const { red, green, yellow, black } = require("chalk");
 const { isString } = require("lodash");
 
 

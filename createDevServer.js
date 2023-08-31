@@ -5,7 +5,7 @@ const fs = require("fs");
 const webpack = require("webpack");
 const WebpackDevServer = require("webpack-dev-server");
 const clearConsole = require("react-dev-utils/clearConsole");
-const { bold } = require("colorette");
+const { bold } = require("chalk");
 
 const webpackConfig = require("./webpack.config");
 const devServerConfig = require("./webpackDevServer.config");
