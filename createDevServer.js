@@ -45,7 +45,7 @@ const _startElectron = (port) => {
 		exitProcessWithError({
 			message: [
 				"An error occured while starting Electron.",
-				"Please make sure the dependencies `electron` is installed."
+				"Please make sure the dependency `electron` is installed."
 			],
 			stack: error.stack || error
 		});
