@@ -93,8 +93,9 @@ At the root of your project, create a `rebuiltron.config.js` file.
 | --- | :---: | :---: | --- |
 | `renderers` | `object` | ✓ | Renderer entries. It takes the name of the entries as keys and their paths as values. |
 | `preloads` | `object` | ✓ | Preload entries. It takes the name of the entries as keys and their paths as values. |
-| `sassOptions` | `object` | ✗ | Custom SASS options for `sass-loader`. |
-| `sassOptions.additionalData` | `object` | ✗* | Configuration of `additionalData`. |
+| `srcAlias` | `string` | ✗ | Custom [alias](https://webpack.js.org/configuration/resolve/#resolvealias) to the `src` folder.
+| `sassOptions` | `object` | ✗ | Custom SASS options for [`sass-loader`](https://github.com/webpack-contrib/sass-loader). |
+| `sassOptions.additionalData` | `object` | ✗* | Configuration of [`additionalData`](https://webpack.js.org/loaders/sass-loader/#additionaldata). |
 | `sassOptions.additionalData.data` | `string` | ✗* | Data to prepend to SASS files. |
 | `sassOptions.additionalData.exclude` | `Regex` | ✗* | Regex matching the files to exclude from `additionalData`. This is necessary to prevent an `@import loop` error. |
 
@@ -105,12 +106,13 @@ At the root of your project, create a `rebuiltron.config.js` file.
 ```js
 module.exports = {
   renderers: {
-    index: "./src/index.js",
+    app: "./src/app.js",
     worker: "./src/worker.js"
   },
   preloads: {
     worker: "./electron/preloads/worker.js"
   },
+  srcAlias: "@app",
   sassOptions: {
     additionalData: {
       data: "@use \"styles/settings\" as *;",

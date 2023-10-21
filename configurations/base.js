@@ -19,6 +19,8 @@ const javascriptLoaders = require("../loaders/javascript");
 const rebuiltronConfig = require("../rebuiltronConfig");
 
 
+const { srcAlias } = require(paths.appConfig);
+
 module.exports = {
 	stats: "errors-warnings",
 	bail: isEnvProduction,
@@ -43,9 +45,11 @@ module.exports = {
 	resolve: {
 		modules: ["node_modules", paths.appNodeModules, paths.appSrc],
 		extensions: [".web.js", ".js", ".json", ".jsx", ".node"],
-		alias: {
-			src: paths.appSrc
-		}
+		...emptyOr(srcAlias, {
+			alias: {
+				[srcAlias]: paths.appSrc
+			}
+		})
 	},
 	optimization: {
 		minimize: isEnvProduction,
