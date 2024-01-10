@@ -13,7 +13,7 @@ module.exports = (previousFileSizes) => {
 	fsExtra.emptyDirSync(paths.appBuild);
 
 	clearConsole();
-	spinnies.add("build", { text: "Creating production build" });
+	spinnies.add("build", { text: "Creating the production build" });
 
 	const compiler = webpack(webpackConfig);
 

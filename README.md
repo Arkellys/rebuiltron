@@ -85,7 +85,7 @@ Add your desired [browserslist](https://github.com/browserslist/browserslist) in
 
 ### Configuration file
 
-At the root of your project, create a `rebuiltron.config.js` file.
+At the root of your project, create a `rebuiltron.config.cjs` file.
 
 #### Options:
 
