@@ -1,6 +1,6 @@
 {
   "name": "rebuiltron",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "author": "Arkellys",
   "license": "MIT",
   "bin": {
@@ -10,7 +10,7 @@
     "lint": "eslint \"**/*.js\""
   },
   "devDependencies": {
-    "eslint-config-arklint": "^1.3.0"
+    "eslint-config-arklint": "^1.2.2"
   },
   "dependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",

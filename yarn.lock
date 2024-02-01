@@ -3457,10 +3457,10 @@ escape-string-regexp@^4.0.0:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
-eslint-config-arklint@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-arklint/-/eslint-config-arklint-1.3.0.tgz#7094aa7907f0cbcdf0e2e7bb52daf5f80ee6a740"
-  integrity sha512-jme2wsiPKDyXLAA3YTQkgjP7oRPLho3u8L2IIAdRUjORRmkzwAwEvKciEYX0JE2SAaxY4RhPsREZYZmZvt1/ag==
+eslint-config-arklint@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-arklint/-/eslint-config-arklint-1.2.2.tgz#28ba81a67285003e6bf297ea1f3e84c1cd792b10"
+  integrity sha512-ZR+G1gMxEUWQWR6PBcRJbdw/iijQYjbfkakuX6uGOBt7lbGW6TzcR5iK/pQtGEFVQrw+iRPA0lFiVmexImsenQ==
   dependencies:
     "@rushstack/eslint-patch" "^1.7.2"
     confusing-browser-globals "^1.0.11"
