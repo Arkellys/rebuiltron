@@ -1,5 +1,5 @@
 module.exports = {
-	configFileName: "rebuiltron.config.js",
+	configFileName: "rebuiltron.config.cjs",
 	buildDirs: {
 		js: "static/js",
 		media: "static/media",

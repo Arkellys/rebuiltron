@@ -20,6 +20,7 @@ Rebuiltron uses webpack with [SWC](https://swc.rs/) to compile JavaScript instea
 - Development server taking care of starting Electron
 - Production bundler for React and Electron code
 - Support for React, JSX, SASS, ICSS
+- Support for ESM
 
 > [!WARNING]
 > Rebuiltron **doesn't support**: TypeScript, Flow, CSS Modules, Jest, and proxying.
@@ -85,7 +86,7 @@ Add your desired [browserslist](https://github.com/browserslist/browserslist) in
 
 ### Configuration file
 
-At the root of your project, create a `rebuiltron.config.js` file.
+At the root of your project, create a `rebuiltron.config.cjs` file.
 
 #### Options:
 
