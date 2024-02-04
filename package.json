@@ -3,9 +3,7 @@
   "version": "4.0.0",
   "author": "Arkellys",
   "license": "MIT",
-  "bin": {
-    "rebuiltron": "bin/index.js"
-  },
+  "bin": "bin/index.js",
   "scripts": {
     "lint": "eslint \"**/*.js\""
   },
@@ -56,5 +54,6 @@
     "type": "git",
     "url": "git+https://github.com/Arkellys/rebuiltron.git"
   },
-  "homepage": "https://github.com/Arkellys/rebuiltron#readme"
+  "homepage": "https://github.com/Arkellys/rebuiltron#readme",
+  "packageManager": "yarn@4.1.0"
 }
