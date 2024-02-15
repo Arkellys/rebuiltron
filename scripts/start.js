@@ -21,8 +21,8 @@ checkSetup.then(([port]) => {
 	devServer.start();
 
 	["SIGINT", "SIGTERM"].forEach((sig) => {
-		process.on(sig, () => {
-			devServer.close();
+		process.on(sig, async () => {
+			await devServer.stop();
 			process.exit();
 		});
 	});
