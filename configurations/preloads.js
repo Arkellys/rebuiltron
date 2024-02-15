@@ -10,7 +10,6 @@ const { preloads } = require(paths.appConfig);
 
 module.exports = {
 	...baseConfig,
-	mode: "production",
 	target: "electron-preload",
 	entry: mapKeys(preloads, (_value, entryName) => (
 		`${rebuiltronConfig.buildFileNames.preload}.${entryName}`)

@@ -22,6 +22,7 @@ const rebuiltronConfig = require("../rebuiltronConfig");
 const { srcAlias } = require(paths.appConfig);
 
 module.exports = {
+	mode: isEnvProduction ? "production" : "development",
 	stats: "errors-warnings",
 	bail: isEnvProduction,
 	output: {

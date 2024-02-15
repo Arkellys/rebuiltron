@@ -15,7 +15,6 @@ const { renderers } = require(paths.appConfig);
 
 module.exports = {
 	...baseConfig,
-	mode: isEnvProduction ? "production" : "development",
 	target: "browserslist",
 	devtool: shouldUseSourceMap && (isEnvProduction ? "source-map" : "cheap-module-source-map"),
 	entry: renderers,
