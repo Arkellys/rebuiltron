@@ -26,15 +26,13 @@ const _startElectron = (port) => {
 		const executablePath = fs.readFileSync(pathFile, "utf-8");
 		const electronExtPath = path.join(electronModulePath, "dist", executablePath);
 
-		const electronProcess = spawn(electronExtPath, ["."], {
+		spawn(electronExtPath, ["."], {
 			stdio: "inherit",
 			env: {
 				...process.env,
 				DEV_LOCAL_URL: `http://localhost:${port}`
 			}
-		});
-
-		electronProcess.on("close", process.exit);
+		}).on("close", process.exit);
 
 		spinnies.succeed("devServer", { text: `Development server running on port ${bold(port)}` });
 		spinnies.succeed("electron", { text: "Electron started\n" });
