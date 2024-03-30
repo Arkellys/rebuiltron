@@ -8,13 +8,13 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "eslint": "^8.56.0",
-    "eslint-config-arklint": "^1.2.3"
+    "eslint": "^8.57.0",
+    "eslint-config-arklint": "^1.5.0"
   },
   "dependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@svgr/webpack": "^8.1.0",
-    "@swc/core": "^1.4.1",
+    "@swc/core": "^1.4.11",
     "browserslist": "^4.23.0",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "copy-webpack-plugin": "^12.0.2",
@@ -24,24 +24,24 @@
     "fs-extra": "^11.2.0",
     "html-webpack-plugin": "^5.6.0",
     "lodash": "^4.17.21",
-    "mini-css-extract-plugin": "^2.8.0",
-    "postcss": "^8.4.35",
+    "mini-css-extract-plugin": "^2.8.1",
+    "postcss": "^8.4.38",
     "postcss-flexbugs-fixes": "^5.0.2",
-    "postcss-loader": "^8.1.0",
+    "postcss-loader": "^8.1.1",
     "postcss-normalize": "^10.0.1",
-    "postcss-preset-env": "^9.3.0",
+    "postcss-preset-env": "^9.5.2",
     "react-dev-utils": "^12.0.1",
     "react-refresh": "^0.14.0",
     "resolve-url-loader": "^5.0.0",
-    "sass-loader": "^14.1.0",
+    "sass-loader": "^14.1.1",
     "source-map-loader": "^5.0.0",
     "spinnies": "^0.5.1",
     "string-replace-loader": "^3.1.0",
     "style-loader": "^3.3.4",
     "swc-loader": "^0.2.6",
     "terser-webpack-plugin": "^5.3.10",
-    "webpack": "^5.90.1",
-    "webpack-dev-server": "^5.0.1"
+    "webpack": "^5.91.0",
+    "webpack-dev-server": "^5.0.4"
   },
   "peerDependencies": {
     "electron": ">=28.0.0",
