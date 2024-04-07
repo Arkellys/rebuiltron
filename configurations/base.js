@@ -44,11 +44,11 @@ module.exports = {
 		level: "none"
 	},
 	resolve: {
-		modules: ["node_modules", paths.appNodeModules, paths.appSrc],
+		modules: ["node_modules", paths.appNodeModules, paths.src],
 		extensions: [".web.js", ".js", ".json", ".jsx", ".node"],
 		...emptyOr(srcAlias, {
 			alias: {
-				[srcAlias]: paths.appSrc
+				[srcAlias]: paths.src
 			}
 		})
 	},

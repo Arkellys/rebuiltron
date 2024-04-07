@@ -11,7 +11,7 @@ module.exports = {
 		directory: paths.appPublic,
 		publicPath: [paths.basePath],
 		watch: {
-			ignored: ignoredFiles(paths.appSrc)
+			ignored: ignoredFiles(paths.src)
 		}
 	},
 	client: {

@@ -44,8 +44,6 @@ Rebuiltron expects the following folder structure:
 
 ```shell
 my-app
-├── electron/
-│   └── # Main and preload files
 ├── public/
 │   └── # Renderer HTML file(s)
 ├── src/
@@ -92,8 +90,8 @@ At the root of your project, create a `rebuiltron.config.cjs` file.
 
 | Option | Type | Required | Description |
 | --- | :---: | :---: | --- |
-| `renderers` | `object` | ✓ | Renderer entries. It takes the name of the entries as keys and their paths as values. |
-| `preloads` | `object` | ✓ | Preload entries. It takes the name of the entries as keys and their paths as values. |
+| `renderers` | `object` | ✓ | Renderer entries. It takes the name of the entries as keys and their paths as values. All paths must be relative. |
+| `preloads` | `object` | ✓ | Preload entries. It takes the name of the entries as keys and their paths as values. All paths must be relative. |
 | `srcAlias` | `string` | ✗ | Custom [alias](https://webpack.js.org/configuration/resolve/#resolvealias) to the `src` folder.
 | `sassOptions` | `object` | ✗ | Custom SASS options for [`sass-loader`](https://github.com/webpack-contrib/sass-loader). |
 | `sassOptions.additionalData` | `object` | ✗* | Configuration of [`additionalData`](https://webpack.js.org/loaders/sass-loader/#additionaldata). |

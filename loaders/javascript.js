@@ -6,7 +6,7 @@ module.exports = [
 	{
 		// Converts `import.meta.url` before SWC transpiles so paths using it stay dynamic
 		test: /\.js$/,
-		include: [paths.electronSrc],
+		include: [paths.electronMain],
 		loader: require.resolve("string-replace-loader"),
 		options: {
 			search: "import.meta.url",

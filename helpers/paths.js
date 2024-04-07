@@ -14,8 +14,7 @@ module.exports = {
 	appBuild: resolveApp(rebuiltronConfig.appDirs.build),
 	appPublic: resolveApp(rebuiltronConfig.appDirs.public),
 	appPackageJson: packageJsonPath,
-	appSrc: resolveApp(rebuiltronConfig.appDirs.appSrc),
-	electronSrc: resolveApp(rebuiltronConfig.appDirs.electronSrc),
+	src: resolveApp(rebuiltronConfig.appDirs.src),
 	appNodeModules: resolveApp("node_modules"),
 	appWebpackCache: resolveApp("node_modules/.cache"),
 	basePath: isEnvDevelopment ? "/" : "./"

@@ -11,8 +11,7 @@ module.exports = {
 	},
 	appDirs: {
 		public: "public",
-		electronSrc: "electron",
-		appSrc: "src",
+		src: "src",
 		build: "build"
 	}
 };

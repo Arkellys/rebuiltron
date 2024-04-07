@@ -71,7 +71,7 @@ module.exports = [
 				loader: require.resolve("resolve-url-loader"),
 				options: {
 					sourceMap: shouldUseSourceMap,
-					root: paths.appSrc
+					root: paths.src
 				}
 			},
 			{
