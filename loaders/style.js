@@ -13,7 +13,7 @@ const { sassOptions } = require(paths.appConfig);
 
 const _publicPath = rebuiltronConfig.buildDirs.css
 	.split("/")
-	.reduce(path => (path + "../"), "");
+	.reduce((path) => (path + "../"), "");
 
 const _getBaseStyleLoaders = () => ([
 	...emptyOr(isEnvDevelopment, [require.resolve("style-loader")]),

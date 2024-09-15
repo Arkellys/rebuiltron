@@ -63,7 +63,7 @@ module.exports = () => {
 				});
 
 				return log.warning(warnings.join("\n\n"));
-			};
+			}
 
 			spinnies.succeed("watch", {
 				text: `Preload file(s) compiled ${green(bold("successfully"))}`

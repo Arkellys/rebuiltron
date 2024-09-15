@@ -26,7 +26,7 @@ module.exports = {
 	},
 	plugins: [
 		...baseConfig.plugins,
-		...keys(renderers).map(renderer => (
+		...keys(renderers).map((renderer) => (
 			new HtmlWebpackPlugin({
 				inject: true,
 				template: path.join(paths.appPublic, `${renderer}.html`),

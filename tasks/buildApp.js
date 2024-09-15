@@ -55,7 +55,7 @@ module.exports = (previousFileSizes) => {
 				});
 
 				return log.warning(warnings.join("\n\n"));
-			};
+			}
 
 			spinnies.succeed("build", {
 				text: `Compiled ${green(bold("successfully"))}`
