@@ -13,28 +13,33 @@ const spinnies = require("../helpers/spinnies");
  * @returns {Promise<WebpackDevServer>} Development server instance
  */
 
-module.exports = async (port) => {
-	let isFirstRun = true;
-	const rendererCompiler = webpack(webpackConfig.development.renderers);
+module.exports = (port) => (
+	new Promise(async (resolve) => {
+		let devServer;
+		let isFirstRun = true;
 
-	spinnies.add("devServer", { text: "Starting the development server" });
+		const rendererCompiler = webpack(webpackConfig.development.renderers);
 
-	rendererCompiler.hooks.invalid.tap("invalid", () => {
-		clearConsole();
-		spinnies.add("compile", { text: "Compiling..." });
-	});
+		spinnies.add("devServer", { text: "Starting the development server" });
 
-	rendererCompiler.hooks.done.tap("done", () => {
-		if (isFirstRun) return isFirstRun = false;
+		rendererCompiler.hooks.invalid.tap("invalid", () => {
+			clearConsole();
+			spinnies.add("compile", { text: "Compiling..." });
+		});
 
-		clearConsole();
-		spinnies.remove("compile");
-	});
+		rendererCompiler.hooks.done.tap("done", () => {
+			if (isFirstRun) {
+				isFirstRun = false;
 
-	const devServer = new WebpackDevServer({ ...devServerConfig, port }, rendererCompiler);
-	await devServer.start();
+				spinnies.succeed("devServer", { text: `Development server running on port ${bold(port)}` });
+				return resolve(devServer);
+			}
 
-	spinnies.succeed("devServer", { text: `Development server running on port ${bold(port)}` });
+			clearConsole();
+			spinnies.remove("compile");
+		});
 
-	return devServer;
-};
+		devServer = new WebpackDevServer({ ...devServerConfig, port }, rendererCompiler);
+		await devServer.start();
+	})
+);
