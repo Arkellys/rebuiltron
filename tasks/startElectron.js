@@ -8,6 +8,7 @@ const spinnies = require("../helpers/spinnies");
 /**
  * Starts Electron.
  * @param {number} port - Port on which the renderer is served
+ * @returns {Promise<void>} Promise resolving when compilation is successful
  */
 
 module.exports = (port) => (
