@@ -3,11 +3,14 @@ const rebuiltronConfig = require("../rebuiltronConfig");
 const baseConfig = require("./base");
 
 
+const { main } = require(paths.appConfig);
+
+
 module.exports = {
 	...baseConfig,
 	target: "electron-main",
 	entry: {
-		[rebuiltronConfig.buildFileNames.main]: paths.electronMain
+		[rebuiltronConfig.buildFileNames.main]: main
 	},
 	output: {
 		...baseConfig.output,

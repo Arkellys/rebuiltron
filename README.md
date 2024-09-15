@@ -9,7 +9,7 @@ A tool made to easily build an offline **React/Electron** app using webpack.
 The idea behind Rebuiltron was to migrate one of my project initially created with the deprecated [CRA](https://create-react-app.dev/) to a maintained tool configured with Electron in mind. As such, it has been developed using [react-scripts](https://github.com/facebook/create-react-app/tree/main/packages/react-scripts) as a base, but heavily edited and stripped of a lot of features.
 
 > [!IMPORTANT]
-> Since I made Rebuiltron specifically for one of my own projects, I only kept in the configuration what *this* project needed and nothing more. Except for the entry points and some SASS options, **Rebuiltron doesn't offer any configurable options**. If you are looking to create a new Electron/React app, or even migrating an existing CRA app, you should probably take a look at [electron-vite](https://electron-vite.org/) instead.
+> Since I made Rebuiltron specifically for one of my own projects, I only kept in the configuration what *this* project needed and nothing more. Except for the entry points and some basic options, **Rebuiltron doesn't offer many configurable options**. If you are looking to create a new Electron/React app, or even migrating an existing CRA app, you should probably look for a more generic tool.
 
 
 ## Features
@@ -20,10 +20,10 @@ Rebuiltron uses webpack with [SWC](https://swc.rs/) to compile JavaScript instea
 - Development server taking care of starting Electron
 - Production bundler for React and Electron code
 - Support for React, JSX, SASS, ICSS
-- Support for ESM
+- Support for ES6 imports on all processes
 
 > [!WARNING]
-> Rebuiltron **doesn't support**: TypeScript, Flow, CSS Modules, Jest, and proxying.
+> Rebuiltron **doesn't support**: TypeScript, Flow, CSS Modules, ESM, Jest, and proxying.
 
 
 ## Installation
@@ -36,7 +36,7 @@ yarn add rebuiltron -D
 
 ## Configuration
 
-The following documentation assume you already have a basic knowledge of how to use React and Electron.
+The following documentation assumes you already have a basic knowledge of how to use React and Electron.
 
 ### Folder structure
 
@@ -56,12 +56,14 @@ Set the main Electron entry in `package.json`:
 
 ```json
 {
-  "main": "electron/main.js",
+  "main": "build/static/js/electron.main.js",
 }
 ```
 
+This field points to the compiled version of the main file and **must** be named as above. Your original main file can be named however you want.
+
 ### Scripts
-Add Rebuiltron scripts:
+Add Rebuiltron scripts to your `package.json`:
 
 ```json
 {
@@ -84,12 +86,13 @@ Add your desired [browserslist](https://github.com/browserslist/browserslist) in
 
 ### Configuration file
 
-At the root of your project, create a `rebuiltron.config.cjs` file.
+At the root of your project, create a `rebuiltron.config.js` file.
 
 #### Options:
 
-| Option | Type | Required | Description |
+| Name | Type | Required | Description |
 | --- | :---: | :---: | --- |
+| `main` | `string` | ✓ | Main entry. The path must be relative.
 | `renderers` | `object` | ✓ | Renderer entries. It takes the name of the entries as keys and their paths as values. All paths must be relative. |
 | `preloads` | `object` | ✓ | Preload entries. It takes the name of the entries as keys and their paths as values. All paths must be relative. |
 | `srcAlias` | `string` | ✗ | Custom [alias](https://webpack.js.org/configuration/resolve/#resolvealias) to the `src` folder.
@@ -104,12 +107,13 @@ At the root of your project, create a `rebuiltron.config.cjs` file.
 
 ```js
 module.exports = {
+  main: "./electron/main.js",
   renderers: {
     app: "./src/app.js",
     worker: "./src/worker.js"
   },
   preloads: {
-    worker: "./electron/preloads/worker.js"
+    app: "./electron/preloads/app.js"
   },
   srcAlias: "@app",
   sassOptions: {
@@ -124,14 +128,27 @@ module.exports = {
 > [!NOTE]
 > Your renderers entry file(s) will be automatically injected into your HTML file(s). Thus, make sure you have a corresponding HTML file in the `public` folder for each entry (using the same name).
 
+### Preloads
+
+Since Rebuiltron will build the preload file(s) both in development and production, you can use a single path for both environment. Built files use the names declared in your configuration: `electron.preload.[name].js`.
+
+```js
+const appWindow = new BrowserWindow({
+  webPreferences: {
+    // Using the example configuration file above
+    preload: path.join(__dirname, "electron.preload.app.js"),
+  }
+});
+```
+
 ### Environment variables
 
 When the development server is running, Rebuiltron exposes a `DEV_LOCAL_URL` variable that you can access on your main process using `process.env.DEV_LOCAL_URL`.
 
 ```js
-if(!app.isPackaged) {
-  appWindow.loadURL(`${process.env.DEV_LOCAL_URL}/index.html`);
-}
+app.isPackaged
+  ? appWindow.loadFile(join(__dirname, "../../app.html")) // Prod
+  : appWindow.loadURL(`${process.env.DEV_LOCAL_URL}/app.html`); // Dev
 ```
 
 ## Usage

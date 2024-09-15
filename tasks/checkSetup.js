@@ -2,11 +2,12 @@ const fs = require("fs");
 
 const detect = require("detect-port");
 
-const { isEnvProduction } = require("./helpers/environment");
-const rebuiltronConfig = require("./rebuiltronConfig");
-const { resolveApp } = require("./helpers/utils");
+const { isEnvProduction } = require("../helpers/environment");
+const rebuiltronConfig = require("../rebuiltronConfig");
+const { resolveApp } = require("../helpers/utils");
 
 /**
+ * @type {Promise<number>}
  * Checks whether the default port is available, otherwise resolves with the next available port.
  */
 
@@ -20,6 +21,7 @@ const checkPort = new Promise(async (resolve) => {
 });
 
 /**
+ * @type {Promise<void>}
  * Checks whether Electron's entry point is set.
  */
 
@@ -38,6 +40,7 @@ const checkEntryPoint = new Promise((resolve, reject) => {
 });
 
 /**
+ * @type {Promise<void>}
  * Checks whether Rebuiltron's config file exists and contains the required fields.
  */
 
@@ -51,8 +54,9 @@ const checkAppConfig = new Promise((resolve, reject) => {
 		]);
 	}
 
-	const { preloads, renderers } = require(configPath);
+	const { main, preloads, renderers } = require(configPath);
 
+	if (!main) reject("Configuration error: `main` field is required.");
 	if (!preloads) reject("Configuration error: `preloads` field is required.");
 	if (!renderers) reject("Configuration error: `renderers` field is required.");
 

@@ -4,21 +4,25 @@ process.env.NODE_ENV = "development";
 
 const clearConsole = require("react-dev-utils/clearConsole");
 
-const checkSetup = require("../checkSetup");
+const checkSetup = require("../tasks/checkSetup");
+const startDevServer = require("../tasks/startDevServer");
+const compileMain = require("../tasks/compileMain");
+const watchPreloads = require("../tasks/watchPreloads");
+const startElectron = require("../tasks/startElectron");
 const { exitProcessWithError } = require("../helpers/utils");
-const spinnies = require("../helpers/spinnies");
 
 
 process.on("unhandledRejection", exitProcessWithError);
 
-checkSetup.then(([port]) => {
-	const createDevServer = require("../createDevServer");
-	const devServer = createDevServer(port);
-
+checkSetup.then(async ([port]) => {
 	clearConsole();
-	spinnies.add("devServer", { text: "Starting the development server" });
 
-	devServer.start();
+	await watchPreloads();
+	await compileMain();
+	const devServer = await startDevServer(port);
+	await startElectron(port);
+
+	console.log();
 
 	["SIGINT", "SIGTERM"].forEach((sig) => {
 		process.on(sig, async () => {
