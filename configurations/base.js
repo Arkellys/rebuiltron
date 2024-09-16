@@ -13,7 +13,6 @@ const { srcAlias } = require(paths.appConfig);
 
 
 module.exports = {
-	mode: isEnvProduction ? "production" : "development",
 	stats: "errors-warnings",
 	bail: isEnvProduction,
 	output: {
@@ -69,9 +68,7 @@ module.exports = {
 		strictExportPresence: true
 	},
 	plugins: [
-		...emptyOr(isEnvDevelopment, [
-			new CaseSensitivePathsPlugin() // Detects case errors in import paths
-		]),
+		...emptyOr(isEnvDevelopment, [new CaseSensitivePathsPlugin()]), // Detects case errors in import paths
 		new ModuleNotFoundPlugin(paths.appPath) // Gives some necessary context to module not found errors
 	],
 	performance: false // Performance processing is already handled via `FileSizeReporter`

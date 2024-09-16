@@ -9,6 +9,7 @@ const { main } = require(paths.appConfig);
 
 module.exports = {
 	...baseConfig,
+	mode: "production",
 	target: "electron-main",
 	entry: {
 		[rebuiltronConfig.buildFileNames.main]: main
