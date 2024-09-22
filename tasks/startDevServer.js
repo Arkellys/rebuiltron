@@ -1,11 +1,12 @@
 const webpack = require("webpack");
 const WebpackDevServer = require("webpack-dev-server");
-const clearConsole = require("react-dev-utils/clearConsole");
 const { bold } = require("chalk");
 
 const webpackConfig = require("../webpack.config");
 const devServerConfig = require("../webpackDevServer.config");
 const spinnies = require("../helpers/spinnies");
+const { getCompilationText, logStats, clearConsole } = require("../helpers/utils");
+const { COMPILATION_ASSETS, COMPILATION_STATES } = require("../helpers/constants");
 
 /**
  * Starts the development server.
@@ -18,28 +19,66 @@ module.exports = (port) => (
 		let devServer;
 		let isFirstRun = true;
 
-		const rendererCompiler = webpack(webpackConfig.development.renderers);
+		const asset = COMPILATION_ASSETS.RENDERER;
+		const compiler = webpack(webpackConfig.development.renderers);
 
 		spinnies.add("devServer", { text: "Starting the development server" });
 
-		rendererCompiler.hooks.invalid.tap("invalid", () => {
-			clearConsole();
-			spinnies.add("compile", { text: "Compiling..." });
+		compiler.hooks.compile.tap("compile", () => {
+			if (!isFirstRun) clearConsole();
+
+			spinnies.add("compile", {
+				text: getCompilationText({
+					asset,
+					state: COMPILATION_STATES.PENDING
+				})
+			});
 		});
 
-		rendererCompiler.hooks.done.tap("done", () => {
+		compiler.hooks.done.tap("done", (stats) => {
 			if (isFirstRun) {
 				isFirstRun = false;
 
 				spinnies.succeed("devServer", { text: `Development server running on port ${bold(port)}` });
-				return resolve(devServer);
+				resolve(devServer);
 			}
 
-			clearConsole();
-			spinnies.remove("compile");
+			if (stats.hasErrors()) {
+				spinnies.fail("compile", {
+					text: getCompilationText({
+						asset,
+						state: COMPILATION_STATES.ERROR,
+						stats
+					}),
+					failColor: "white"
+				});
+
+				return logStats(stats);
+			}
+
+			if (stats.hasWarnings()) {
+				spinnies.update("compile", {
+					text: getCompilationText({
+						asset,
+						state: COMPILATION_STATES.WARNING,
+						stats
+					}),
+					status: "stopped",
+					color: "white"
+				});
+
+				return logStats(stats);
+			}
+
+			spinnies.succeed("compile", {
+				text: getCompilationText({
+					asset,
+					state: COMPILATION_STATES.SUCCESS
+				})
+			});
 		});
 
-		devServer = new WebpackDevServer({ ...devServerConfig, port }, rendererCompiler);
+		devServer = new WebpackDevServer({ ...devServerConfig, port }, compiler);
 		await devServer.start();
 	})
 );

@@ -15,10 +15,14 @@ module.exports = {
 		}
 	},
 	client: {
+		progress: true,
 		overlay: {
 			errors: true,
 			warnings: false
 		}
+	},
+	devMiddleware: {
+		stats: "none" // Already handled manually
 	},
 	historyApiFallback: {
 		disableDotRule: true, // Supports route with dots

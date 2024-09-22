@@ -1,13 +1,9 @@
-const fsExtra = require("fs-extra");
 const webpack = require("webpack");
-const clearConsole = require("react-dev-utils/clearConsole");
-const formatWebpackMessages = require("react-dev-utils/formatWebpackMessages");
-const { bold, green, yellow } = require("chalk");
 
-const paths = require("../helpers/paths");
 const webpackConfig = require("../webpack.config");
 const spinnies = require("../helpers/spinnies");
-const log = require("../helpers/logger");
+const { logStats, getCompilationText, clearConsole } = require("../helpers/utils");
+const { COMPILATION_STATES } = require("../helpers/constants");
 
 
 /**
@@ -16,50 +12,50 @@ const log = require("../helpers/logger");
  * @returns {Promise<{ stats: webpack.Stats | undefined, previousFileSizes: any }>} Result of the build
  */
 
-module.exports = (previousFileSizes) => {
-	fsExtra.emptyDirSync(paths.appBuild);
-	const compiler = webpack(webpackConfig.production);
+module.exports = (previousFileSizes) => new Promise((resolve, reject) => {
+	clearConsole();
+	spinnies.add("build", { text: "Creating the production build" });
 
-	return new Promise((resolve, reject) => {
+	webpack(webpackConfig.production, (error, stats) => {
 		clearConsole();
-		spinnies.add("build", { text: "Creating the production build" });
 
-		compiler.run((error, stats) => {
-			if (!error) {
-				return resolve({
-					stats,
-					previousFileSizes
-				});
-			}
-
+		if (error || stats.hasErrors()) {
 			spinnies.fail("build", {
-				text: "Failed to compile"
+				text: getCompilationText({
+					state: COMPILATION_STATES.FATAL_ERROR
+				})
 			});
 
-			reject(error);
+			if (stats) logStats(stats);
+			return reject(error);
+		}
+
+		if (stats.hasWarnings()) {
+			spinnies.update("build", {
+				text: getCompilationText({
+					state: COMPILATION_STATES.WARNING
+				}),
+				status: "stopped",
+				color: "white"
+			});
+
+			logStats(stats);
+
+			return resolve({
+				stats,
+				previousFileSizes
+			});
+		}
+
+		spinnies.succeed("build", {
+			text: getCompilationText({
+				state: COMPILATION_STATES.SUCCESS
+			})
 		});
 
-		compiler.hooks.done.tap("done", (stats) => {
-			clearConsole();
-
-			const statsData = stats.toJson({ all: false, warnings: true, errors: true });
-			const { errors, warnings } = formatWebpackMessages(statsData);
-
-			if (stats.hasErrors()) throw new Error(errors);
-
-			if (stats.hasWarnings()) {
-				spinnies.update("build", {
-					text: `Compiled ${yellow(bold("with warnings"))}`,
-					status: "stopped",
-					color: "white"
-				});
-
-				return log.warning(warnings.join("\n\n"));
-			}
-
-			spinnies.succeed("build", {
-				text: `Compiled ${green(bold("successfully"))}`
-			});
+		return resolve({
+			stats,
+			previousFileSizes
 		});
 	});
-};
+});
