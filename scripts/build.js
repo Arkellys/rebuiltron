@@ -5,10 +5,10 @@ process.env.NODE_ENV = "production";
 const fsExtra = require("fs-extra");
 const { measureFileSizesBeforeBuild, printFileSizesAfterBuild } = require("react-dev-utils/FileSizeReporter");
 
-const buildApp = require("../tasks/buildApp");
-const checkSetup = require("../tasks/checkSetup");
 const paths = require("../helpers/paths");
 const { exitProcessWithError } = require("../helpers/utils");
+const buildApp = require("../tasks/buildApp");
+const checkSetup = require("../tasks/checkSetup");
 
 
 process.on("unhandledRejection", exitProcessWithError);

@@ -1,9 +1,9 @@
 const webpack = require("webpack");
 
-const webpackConfig = require("../webpack.config");
+const { COMPILATION_STATES } = require("../helpers/constants");
 const spinnies = require("../helpers/spinnies");
 const { logStats, getCompilationText, clearConsole } = require("../helpers/utils");
-const { COMPILATION_STATES } = require("../helpers/constants");
+const webpackConfig = require("../webpack.config");
 
 
 /**

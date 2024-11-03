@@ -2,8 +2,8 @@ const path = require("path");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const paths = require("../helpers/paths");
 const { shouldUseSourceMap, isEnvDevelopment, isEnvProduction } = require("../helpers/environment");
+const paths = require("../helpers/paths");
 const { emptyOr } = require("../helpers/utils");
 const rebuiltronConfig = require("../rebuiltronConfig");
 

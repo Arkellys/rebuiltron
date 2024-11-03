@@ -1,21 +1,22 @@
 const path = require("path");
 
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { keys } = require("lodash");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const InlineChunkHtmlPlugin = require("react-dev-utils/InlineChunkHtmlPlugin");
-const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const { keys } = require("lodash");
 
-const paths = require("../helpers/paths");
 const { isEnvProduction, isEnvDevelopment, shouldUseSourceMap } = require("../helpers/environment");
+const paths = require("../helpers/paths");
 const { emptyOr } = require("../helpers/utils");
-const rebuiltronConfig = require("../rebuiltronConfig");
-const baseConfig = require("./base");
 const imageLoaders = require("../loaders/images");
-const styleLoaders = require("../loaders/style");
 const javascriptLoaders = require("../loaders/javascript");
+const styleLoaders = require("../loaders/style");
+const rebuiltronConfig = require("../rebuiltronConfig");
+
+const baseConfig = require("./base");
 
 
 const { renderers } = require(paths.appConfig);

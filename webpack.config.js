@@ -1,6 +1,6 @@
-const rendererConfig = require("./configurations/renderers");
-const preloadConfig = require("./configurations/preloads");
 const mainConfig = require("./configurations/main");
+const preloadConfig = require("./configurations/preloads");
+const rendererConfig = require("./configurations/renderers");
 
 
 module.exports = {

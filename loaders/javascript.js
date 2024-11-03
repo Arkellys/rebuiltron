@@ -1,7 +1,7 @@
 const path = require("path");
 
-const paths = require("../helpers/paths");
 const { shouldUseSourceMap, isEnvProduction } = require("../helpers/environment");
+const paths = require("../helpers/paths");
 
 
 module.exports = [

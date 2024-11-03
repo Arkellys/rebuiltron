@@ -1,12 +1,13 @@
+const { bold } = require("chalk");
 const webpack = require("webpack");
 const WebpackDevServer = require("webpack-dev-server");
-const { bold } = require("chalk");
 
-const webpackConfig = require("../webpack.config");
-const devServerConfig = require("../webpackDevServer.config");
+const { COMPILATION_ASSETS, COMPILATION_STATES } = require("../helpers/constants");
 const spinnies = require("../helpers/spinnies");
 const { getCompilationText, logStats, clearConsole } = require("../helpers/utils");
-const { COMPILATION_ASSETS, COMPILATION_STATES } = require("../helpers/constants");
+const webpackConfig = require("../webpack.config");
+const devServerConfig = require("../webpackDevServer.config");
+
 
 /**
  * Starts the development server.

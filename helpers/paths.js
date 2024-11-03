@@ -1,4 +1,5 @@
 const rebuiltronConfig = require("../rebuiltronConfig.js");
+
 const { isEnvDevelopment } = require("./environment.js");
 const { resolveApp } = require("./utils.js");
 

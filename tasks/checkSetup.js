@@ -3,8 +3,9 @@ const fs = require("fs");
 const detect = require("detect-port");
 
 const { isEnvProduction } = require("../helpers/environment");
-const rebuiltronConfig = require("../rebuiltronConfig");
 const { resolveApp } = require("../helpers/utils");
+const rebuiltronConfig = require("../rebuiltronConfig");
+
 
 /**
  * @type {Promise<number>}

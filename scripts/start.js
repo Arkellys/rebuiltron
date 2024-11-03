@@ -2,12 +2,12 @@ process.env.BABEL_ENV = "development";
 process.env.NODE_ENV = "development";
 
 
-const checkSetup = require("../tasks/checkSetup");
-const startDevServer = require("../tasks/startDevServer");
-const compileMain = require("../tasks/compileMain");
-const watchPreloads = require("../tasks/watchPreloads");
-const startElectron = require("../tasks/startElectron");
 const { exitProcessWithError, clearConsole } = require("../helpers/utils");
+const checkSetup = require("../tasks/checkSetup");
+const compileMain = require("../tasks/compileMain");
+const startDevServer = require("../tasks/startDevServer");
+const startElectron = require("../tasks/startElectron");
+const watchPreloads = require("../tasks/watchPreloads");
 
 
 process.on("unhandledRejection", exitProcessWithError);

@@ -1,9 +1,10 @@
 const { mapKeys } = require("lodash");
 
 const paths = require("../helpers/paths");
-const rebuiltronConfig = require("../rebuiltronConfig");
-const baseConfig = require("./base");
 const javascriptLoaders = require("../loaders/javascript");
+const rebuiltronConfig = require("../rebuiltronConfig");
+
+const baseConfig = require("./base");
 
 
 const { preloads } = require(paths.appConfig);

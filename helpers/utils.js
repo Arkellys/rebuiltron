@@ -1,13 +1,13 @@
 /* eslint-disable jsdoc/valid-types, jsdoc/match-description */
 
-const path = require("path");
 const fs = require("fs");
+const path = require("path");
 
-const { isArray } = require("lodash");
 const { bold, red, green, yellow } = require("chalk");
+const { isArray } = require("lodash");
 
-const spinnies = require("./spinnies");
 const { COMPILATION_STATES } = require("./constants");
+const spinnies = require("./spinnies");
 
 
 /**

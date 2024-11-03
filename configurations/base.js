@@ -1,11 +1,11 @@
 const { createHash } = require("crypto");
 
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
-const paths = require("../helpers/paths");
 const { isEnvDevelopment, isEnvProduction } = require("../helpers/environment");
+const paths = require("../helpers/paths");
 const { emptyOr } = require("../helpers/utils");
 
 
