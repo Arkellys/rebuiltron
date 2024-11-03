@@ -1,3 +1,5 @@
+const path = require("path");
+
 const paths = require("../helpers/paths");
 const { shouldUseSourceMap, isEnvProduction } = require("../helpers/environment");
 
@@ -10,6 +12,16 @@ module.exports = [
 			loader: require.resolve("swc-loader"),
 			options: {
 				jsc: {
+					experimental: {
+						plugins: [
+							["@swc/plugin-transform-imports", {
+								lodash: {
+									transform: "lodash/{{member}}"
+								}
+							}]
+						],
+						cacheRoot: path.join(paths.appWebpackCache, "swc")
+					},
 					parser: {
 						syntax: "ecmascript",
 						jsx: true,
