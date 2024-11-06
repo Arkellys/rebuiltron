@@ -1,15 +1,17 @@
 const { createHash } = require("crypto");
 
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
+const { isEmpty } = require("lodash");
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const { IgnorePlugin } = require("webpack");
 
 const { isEnvDevelopment, isEnvProduction } = require("../helpers/environment");
 const paths = require("../helpers/paths");
 const { emptyOr } = require("../helpers/utils");
 
 
-const { srcAlias } = require(paths.appConfig);
+const { srcAlias, excludeInProduction } = require(paths.appConfig);
 
 
 module.exports = {
@@ -68,8 +70,17 @@ module.exports = {
 		strictExportPresence: true
 	},
 	plugins: [
-		...emptyOr(isEnvDevelopment, [new CaseSensitivePathsPlugin()]), // Detects case errors in import paths
-		new ModuleNotFoundPlugin(paths.appPath) // Gives some necessary context to module not found errors
+		...emptyOr(isEnvDevelopment, [
+			new CaseSensitivePathsPlugin()
+		]),
+		...emptyOr(isEnvProduction && !isEmpty(excludeInProduction), [
+			new IgnorePlugin({
+				checkResource(resource) {
+					return excludeInProduction.includes(resource);
+				}
+			})
+		]),
+		new ModuleNotFoundPlugin(paths.appPath)
 	],
 	performance: false // Performance processing is already handled via `FileSizeReporter`
 };

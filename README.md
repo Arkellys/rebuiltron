@@ -9,7 +9,7 @@ A tool made to easily build an offline **React/Electron** app using webpack.
 The idea behind Rebuiltron was to migrate one of my project initially created with the deprecated [CRA](https://create-react-app.dev/) to a maintained tool configured with Electron in mind. As such, it has been developed using [react-scripts](https://github.com/facebook/create-react-app/tree/main/packages/react-scripts) as a base, but heavily edited and stripped of a lot of features.
 
 > [!IMPORTANT]
-> Since I made Rebuiltron specifically for one of my own projects, I only kept in the configuration what *this* project needed and nothing more. Except for the entry points and some basic options, **Rebuiltron doesn't offer many configurable options**. If you are looking to create a new Electron/React app, or even migrating an existing CRA app, you should probably look for a more generic tool.
+> Since I made Rebuiltron specifically for one of my own projects, I only kept in the configuration what *this* project needed and nothing more. For this reason, **Rebuiltron doesn't offer many configurable options**. If you are looking to create a new Electron/React app, or even migrating an existing CRA app, you should probably look for a more generic tool.
 
 
 ## Features
@@ -23,7 +23,7 @@ Rebuiltron uses webpack with [SWC](https://swc.rs/) to compile JavaScript instea
 - Support for ES6 imports on all processes
 
 > [!WARNING]
-> Rebuiltron **doesn't support**: TypeScript, Flow, CSS Modules, ESM, Jest, and proxying.
+> Rebuiltron **doesn't support**: TypeScript, Flow, CSS Modules, ESM, and proxying.
 
 
 ## Installation
@@ -96,6 +96,7 @@ At the root of your project, create a `rebuiltron.config.js` file.
 | `renderers` | `object` | ✓ | Renderer entries. It takes the name of the entries as keys and their paths as values. All paths must be relative. |
 | `preloads` | `object` | ✓ | Preload entries. It takes the name of the entries as keys and their paths as values. All paths must be relative. |
 | `srcAlias` | `string` | ✗ | Custom [alias](https://webpack.js.org/configuration/resolve/#resolvealias) to the `src` folder.
+| `excludeInProduction` | `string[]` | ✗ | List of modules to exclude in the production bundle.
 | `sassOptions` | `object` | ✗ | Custom SASS options for [`sass-loader`](https://github.com/webpack-contrib/sass-loader). |
 | `sassOptions.additionalData` | `object` | ✗* | Configuration of [`additionalData`](https://webpack.js.org/loaders/sass-loader/#additionaldata). |
 | `sassOptions.additionalData.data` | `string` | ✗* | Data to prepend to SASS files. |
@@ -121,7 +122,10 @@ module.exports = {
       data: "@use \"styles/settings\" as *;",
       exclude: /^src\\styles\\.*/
     }
-  }
+  },
+  excludeInProduction: [
+    "electron-devtools-installer"
+  ]
 };
 ```
 
