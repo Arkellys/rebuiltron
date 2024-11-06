@@ -82,5 +82,5 @@ module.exports = {
 		]),
 		new ModuleNotFoundPlugin(paths.appPath)
 	],
-	performance: false // Performance processing is already handled via `FileSizeReporter`
+	performance: false // Already handled via `FileSizeReporter`
 };
