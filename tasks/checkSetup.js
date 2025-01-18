@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-const detect = require("detect-port");
+const { detect } = require("detect-port");
 
 const { isEnvProduction } = require("../helpers/environment");
 const { resolveApp } = require("../helpers/utils");
