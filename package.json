@@ -1,6 +1,6 @@
 {
   "name": "rebuiltron",
-  "version": "6.2.3",
+  "version": "6.2.4",
   "author": "Arkellys",
   "license": "MIT",
   "bin": "bin/index.js",
