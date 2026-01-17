@@ -8,10 +8,11 @@ const { IgnorePlugin } = require("webpack");
 
 const { isEnvDevelopment, isEnvProduction } = require("../helpers/environment");
 const paths = require("../helpers/paths");
-const { emptyOr } = require("../helpers/utils");
+const { emptyOr, resolveApp } = require("../helpers/utils");
 
 
-const { srcAlias, excludeInProduction } = require(paths.appConfig);
+const { excludeInProduction } = require(paths.appConfig);
+const { compilerOptions } = require(paths.jsConfig);
 
 
 module.exports = {
@@ -38,10 +39,11 @@ module.exports = {
 	resolve: {
 		modules: ["node_modules", paths.appNodeModules, paths.src],
 		extensions: [".web.js", ".js", ".json", ".jsx", ".node"],
-		...emptyOr(srcAlias, {
-			alias: {
-				[srcAlias]: paths.src
-			}
+		...emptyOr(compilerOptions?.paths, {
+			alias: Object.entries(compilerOptions.paths).reduce((aliases, [alias, [path]]) => ({
+				...aliases,
+				[alias]: resolveApp(path)
+			}), {})
 		})
 	},
 	optimization: {

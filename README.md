@@ -21,6 +21,7 @@ Rebuiltron uses webpack with [SWC](https://swc.rs/) to compile JavaScript instea
 - Production bundler for React and Electron code
 - Support for React, JSX, SASS, ICSS
 - Support for ES6 imports on all processes
+- Support for paths aliases (reading the [`paths`](https://www.typescriptlang.org/tsconfig/#paths) field of `jsconfig.json`)
 
 > [!WARNING]
 > Rebuiltron **doesn't support**: TypeScript, Flow, CSS Modules, ESM, and proxying.
@@ -95,7 +96,6 @@ At the root of your project, create a `rebuiltron.config.js` file.
 | `main` | `string` | ✓ | Main entry. The path must be relative.
 | `renderers` | `object` | ✓ | Renderer entries. It takes the name of the entries as keys and their paths as values. All paths must be relative. |
 | `preloads` | `object` | ✓ | Preload entries. It takes the name of the entries as keys and their paths as values. All paths must be relative. |
-| `srcAlias` | `string` | ✗ | Custom [alias](https://webpack.js.org/configuration/resolve/#resolvealias) to the `src` folder.
 | `excludeInProduction` | `string[]` | ✗ | List of modules to exclude in the production bundle.
 | `sassOptions` | `object` | ✗ | Custom SASS options for [`sass-loader`](https://github.com/webpack-contrib/sass-loader). |
 | `sassOptions.additionalData` | `object` | ✗* | Configuration of [`additionalData`](https://webpack.js.org/loaders/sass-loader/#additionaldata). |
@@ -116,7 +116,6 @@ module.exports = {
   preloads: {
     app: "./electron/preloads/app.js"
   },
-  srcAlias: "@app",
   sassOptions: {
     additionalData: {
       data: "@use \"styles/settings\" as *;",
