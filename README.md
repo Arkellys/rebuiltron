@@ -49,6 +49,7 @@ my-app
 │   └── # Renderer HTML file(s)
 ├── src/
 │   └── # Renderer JS file(s)
+├── jsconfig.json
 └── package.json
 ```
 
