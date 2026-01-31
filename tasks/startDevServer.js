@@ -41,7 +41,9 @@ module.exports = (port) => (
 			if (isFirstRun) {
 				isFirstRun = false;
 
-				spinnies.succeed("devServer", { text: `Development server running on port ${styleText("bold", port)}` });
+				const portMessage = styleText("bold", port.toString());
+				spinnies.succeed("devServer", { text: `Development server running on port ${portMessage}` });
+
 				resolve(devServer);
 			}
 
