@@ -1,4 +1,5 @@
-const { bold } = require("chalk");
+const { styleText } = require("node:util");
+
 const webpack = require("webpack");
 const WebpackDevServer = require("webpack-dev-server");
 
@@ -40,7 +41,7 @@ module.exports = (port) => (
 			if (isFirstRun) {
 				isFirstRun = false;
 
-				spinnies.succeed("devServer", { text: `Development server running on port ${bold(port)}` });
+				spinnies.succeed("devServer", { text: `Development server running on port ${styleText("bold", port)}` });
 				resolve(devServer);
 			}
 

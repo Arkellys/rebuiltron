@@ -1,9 +1,9 @@
 /* eslint-disable jsdoc/valid-types, jsdoc/match-description */
 
 const fs = require("fs");
+const { styleText } = require("node:util");
 const path = require("path");
 
-const { bold, red, green, yellow } = require("chalk");
 const { isArray } = require("lodash");
 
 const { COMPILATION_STATES } = require("./constants");
@@ -38,7 +38,7 @@ const exitProcessWithError = (error) => {
 	spinnies.stopAll("fail");
 
 	if (!error) return;
-	console.log(red(`\n${error?.message || error}\n`));
+	console.log(styleText("red", `\n${error?.message || error}\n`));
 
 	process.exit(1);
 };
@@ -96,21 +96,21 @@ const logStats = (stats) => {
  */
 
 const getCompilationText = ({ asset, state, stats }) => {
-	let prefix = asset ? bold(`${asset}: `) : "";
+	let prefix = asset ? styleText("bold", `${asset}: `) : "";
 
 	if (state === COMPILATION_STATES.PENDING) return prefix + `${asset ? "c" : "C"}ompiling...`;
-	if (state === COMPILATION_STATES.FATAL_ERROR) return prefix + bold(`${asset ? "f" : "F"}ailed`) + " to compile";
+	if (state === COMPILATION_STATES.FATAL_ERROR) return prefix + styleText("bold", `${asset ? "f" : "F"}ailed`) + " to compile";
 
 	prefix += `${asset ? "c" : "C"}ompiled `;
 
-	if (state === COMPILATION_STATES.SUCCESS) return prefix + green(bold("successfully"));
+	if (state === COMPILATION_STATES.SUCCESS) return prefix + styleText(["green", "bold"], "successfully");
 
 	const isError = state === COMPILATION_STATES.ERROR;
 
 	const count = stats.toJson()[isError ? "errorsCount" : "warningsCount"];
-	const color = isError ? red : yellow;
+	const color = isError ? "red" : "yellow";
 
-	return prefix + "with " + bold(color(`${count} ${state}${count > 1 ? "s" : ""}`));
+	return prefix + "with " + styleText([color, "bold"], `${count} ${state}${count > 1 ? "s" : ""}`);
 };
 
 

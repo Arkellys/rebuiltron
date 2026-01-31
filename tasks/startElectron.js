@@ -1,8 +1,7 @@
 const { spawn } = require("child_process");
 const fs = require("fs");
+const { styleText } = require("node:util");
 const path = require("path");
-
-const { bold } = require("chalk");
 
 const spinnies = require("../helpers/spinnies");
 
@@ -15,7 +14,7 @@ const spinnies = require("../helpers/spinnies");
 
 module.exports = (port) => (
 	new Promise((resolve, reject) => {
-		spinnies.add("electron", { text: `Starting ${bold("Electron")}` });
+		spinnies.add("electron", { text: `Starting ${styleText("bold", "Electron")}` });
 
 		try {
 			const electronPath = require.resolve("electron");
@@ -32,11 +31,11 @@ module.exports = (port) => (
 				}
 			}).on("close", process.exit);
 
-			spinnies.succeed("electron", { text: `${bold("Electron")} started` });
+			spinnies.succeed("electron", { text: `${styleText("bold", "Electron")} started` });
 			resolve();
 
 		} catch (error) {
-			spinnies.fail("electron", { text: `${bold("Failed")} to start Electron` });
+			spinnies.fail("electron", { text: `${styleText("bold", "Failed")} to start Electron` });
 			reject(error);
 		}
 	})
