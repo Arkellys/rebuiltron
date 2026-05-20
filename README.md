@@ -90,7 +90,7 @@ Add your desired [browserslist](https://github.com/browserslist/browserslist) in
 
 At the root of your project, create a `rebuiltron.config.js` file.
 
-#### Options:
+#### Options
 
 | Name | Type | Required | Description |
 | --- | :---: | :---: | --- |
@@ -99,13 +99,21 @@ At the root of your project, create a `rebuiltron.config.js` file.
 | `preloads` | `object` | ✓ | Preload entries. It takes the name of the entries as keys and their paths as values. All paths must be relative. |
 | `excludeInProduction` | `string[]` | ✗ | List of modules to exclude in the production bundle.
 | `sassOptions` | `object` | ✗ | Custom SASS options for [`sass-loader`](https://github.com/webpack-contrib/sass-loader). |
-| `sassOptions.additionalData` | `object` | ✗* | Configuration of [`additionalData`](https://webpack.js.org/loaders/sass-loader/#additionaldata). |
-| `sassOptions.additionalData.data` | `string` | ✗* | Data to prepend to SASS files. |
-| `sassOptions.additionalData.exclude` | `Regex` | ✗* | Regex matching the files to exclude from `additionalData`. This is necessary to prevent an `@import loop` error. |
 
-<sup>*Required when `sassOptions` is defined.</sup>
+##### `sassOptions`
 
-#### Example:
+| Name | Type | Required | Description |
+| --- | :---: | :---: | --- |
+| `additionalData` | `object` | ✓ | Configuration of [`additionalData`](https://webpack.js.org/loaders/sass-loader/#additionaldata). |
+
+##### `additionalData`
+
+| Name | Type | Required | Description |
+| --- | :---: | :---: | --- |
+| `data` | `string` | ✓ | Data to prepend to SASS files. |
+| `exclude` | `Regex` | ✓ | Regex matching the files to exclude from `additionalData`. This is necessary to prevent an `@import loop` error. |
+
+#### Example
 
 ```js
 module.exports = {
