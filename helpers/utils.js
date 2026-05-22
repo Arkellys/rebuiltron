@@ -1,4 +1,4 @@
-/* eslint-disable jsdoc/valid-types, jsdoc/match-description */
+/* eslint-disable jsdoc/match-description */
 
 const fs = require("fs");
 const { styleText } = require("node:util");
