@@ -39,7 +39,7 @@ module.exports = {
 		modules: ["node_modules", paths.appNodeModules, paths.src],
 		extensions: [".web.js", ".js", ".json", ".jsx", ".node"],
 		tsconfig: {
-			configFile: require(paths.jsConfig)
+			configFile: paths.jsConfig
 		}
 	},
 	optimization: {
