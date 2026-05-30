@@ -13,12 +13,31 @@ const spinnies = require("../helpers/spinnies");
  */
 
 module.exports = (port) => (
-	new Promise((resolve, reject) => {
+	new Promise(async (resolve, reject) => {
 		spinnies.add("electron", { text: `Starting ${styleText("bold", "Electron")}` });
 
 		try {
 			const electronPath = require.resolve("electron");
 			const electronModulePath = path.dirname(electronPath);
+			const electronDistPath = path.join(electronModulePath, "dist");
+
+			const isElectronInstalled = fs.existsSync(electronDistPath);
+
+			if (!isElectronInstalled) {
+				await new Promise((resolveInstall, rejectInstall) => {
+					const installScript = path.join(electronModulePath, "install.js");
+
+					spawn(process.execPath, [installScript], {
+						stdio: "inherit",
+						env: process.env
+					}).on("close", (code) => {
+						if (code === 0) return resolveInstall();
+						rejectInstall(new Error(`Electron install failed (exit ${code})`));
+
+					}).on("error", rejectInstall);
+				});
+			}
+
 			const pathFile = path.join(electronModulePath, "path.txt");
 			const executablePath = fs.readFileSync(pathFile, "utf-8");
 			const electronExtPath = path.join(electronModulePath, "dist", executablePath);
